@@ -1,88 +1,101 @@
-# Modelo Entidad–Relación Pizzería Don Piccolo
+# Modelo Entidad–Relación Pizzería don piccolo
 
-Primer diseño del modelo de base de datos para el sistema de gestión de pedidos y domicilios.
+Segundo diseño del modelo de base de datos para el sistema de gestión de pedidos y domicilios.
 
 ## Diagrama Mermaid
 
-```mermaid
 erDiagram
-
-    usuario {
-        int id_usuario
-        string nombre
-        string telefono
-        string email
-        string tipo_usuario
-        string password
+    PERSONA {
+        INT id_persona PK
+        VARCHAR nombre
+        VARCHAR telefono
+        VARCHAR direccion
+        VARCHAR correo
+        Enum tipo 
     }
 
-    cliente {
-        int id_cliente
-        string direccion
+    CLIENTE {
+        INT id_cliente PK
+        INT id_persona FK
     }
 
-    repartidor {
-        int id_repartidor
-        string zona
-        string estado
+    ZONA {
+        INT id_zona PK
+        VARCHAR nombre
+        DECIMAL costo_envio_base
     }
 
-    pizzas {
-        int id_pizza
-        string nombre
-        string tamaño
-        float precio_base
-        string tipo
+    REPARTIDOR {
+        INT id_repartidor PK
+        INT id_persona FK
+        INT id_zona FK
+        Enum estado
     }
 
-    ingredientes {
-        int id_ingrediente
-        string nombre
-        string tipo
-        int stock
-        int stock_minimo
+    VENDEDOR {
+        INT id_vendedor PK
+        INT id_persona FK
     }
 
-    pizza_ingrediente {
-        int id_pizza_ingrediente
-        int cantidad
+    PIZZA {
+        INT id_pizza PK
+        VARCHAR nombre
+        VARCHAR tamanio
+        DECIMAL precio_base
+        Enum tipo
     }
 
-    pedidos {
-        int id_pedido
-        string fecha_hora
-        string estado
-        float total
-        string metodo_pago
+    INGREDIENTE {
+        INT id_ingrediente PK
+        VARCHAR nombre
+        INT stock
+        INT stock_minimo
+        DECIMAL precio_unitario
     }
 
-    pedido_pizza {
-        int id_pedido_pizza
-        int cantidad
+    PIZZA_INGREDIENTE {
+        INT id_pizza FK
+        INT id_ingrediente FK
+        INT cantidad
     }
 
-    domicilios {
-        int id_domicilio
-        string hora_salida
-        string hora_entrega
-        float distancia
-        float costo_envio
+    PEDIDO {
+        INT id_pedido PK
+        INT id_cliente FK
+        INT id_vendedor FK
+        DATETIME fecha_hora
+        Enum estado
+        Enum metodo_pago
+        Enum tipo_pedido
+        Enum estado_pago
+        DECIMAL total
     }
 
-    pagos {
-        int id_pago
-        float monto
+    PEDIDO_PIZZA {
+        INT id_pedido FK
+        INT id_pizza FK
+        INT cantidad
     }
 
-    usuario ||--|{ cliente : es
-    usuario ||--|{ repartidor : es
+    DOMICILIO {
+        INT id_domicilio PK
+        INT id_pedido FK
+        INT id_repartidor FK
+        DATETIME hora_salida
+        DATETIME hora_entrega
+        DECIMAL distancia
+        DECIMAL costo_envio
+    }
 
-    cliente ||--o{ pedidos : realiza
-    pedidos ||--o{ pedido_pizza : contiene
-    pedido_pizza ||--|| pizzas : pizza
-    pizzas ||--o{ pizza_ingrediente : requiere
-    ingredientes ||--o{ pizza_ingrediente : ingrediente
-
-    pedidos ||--|| domicilios : tiene
-    pedidos ||--|| pagos : pago
-    repartidor ||--o{ pedidos : entrega
+    CLIENTE ||--|| PERSONA : "hereda"
+    REPARTIDOR ||--|| PERSONA : "hereda"
+    VENDEDOR ||--|| PERSONA : "hereda"
+    REPARTIDOR }|--|| ZONA : "asignado a"
+    CLIENTE ||--o{ PEDIDO : "realiza"
+    VENDEDOR ||--o{ PEDIDO : "toma"
+    PEDIDO ||--o{ PEDIDO_PIZZA : "contiene"
+    PIZZA ||--o{ PEDIDO_PIZZA : "se incluye en"
+    PIZZA ||--o{ PIZZA_INGREDIENTE : "tiene"
+    INGREDIENTE ||--o{ PIZZA_INGREDIENTE : "usa"
+    PEDIDO ||--o{ DOMICILIO : "tiene"
+    REPARTIDOR ||--o{ DOMICILIO : "asignado a"
