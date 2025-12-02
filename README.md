@@ -1,9 +1,10 @@
-# Modelo Entidad–Relación Pizzería don piccolo
+# Modelo Entidad–Relación Pizzería Don Piccolo
 
 Segundo diseño del modelo de base de datos para el sistema de gestión de pedidos y domicilios.
 
 ## Diagrama Mermaid
 
+```mermaid
 erDiagram
     PERSONA {
         INT id_persona PK
@@ -11,7 +12,7 @@ erDiagram
         VARCHAR telefono
         VARCHAR direccion
         VARCHAR correo
-        Enum tipo 
+        ENUM tipo
     }
 
     CLIENTE {
@@ -29,7 +30,7 @@ erDiagram
         INT id_repartidor PK
         INT id_persona FK
         INT id_zona FK
-        Enum estado
+        ENUM estado
     }
 
     VENDEDOR {
@@ -42,7 +43,7 @@ erDiagram
         VARCHAR nombre
         VARCHAR tamanio
         DECIMAL precio_base
-        Enum tipo
+        ENUM tipo
     }
 
     INGREDIENTE {
@@ -64,10 +65,10 @@ erDiagram
         INT id_cliente FK
         INT id_vendedor FK
         DATETIME fecha_hora
-        Enum estado
-        Enum metodo_pago
-        Enum tipo_pedido
-        Enum estado_pago
+        ENUM estado
+        ENUM metodo_pago
+        ENUM tipo_pedido
+        ENUM estado_pago
         DECIMAL total
     }
 
