@@ -100,7 +100,4 @@ erDiagram
     PEDIDO ||--o{ DOMICILIO : tiene
     REPARTIDOR ||--o{ DOMICILIO : asignado_a
 <<<<<<< HEAD
- ...
-=======
 ```
->>>>>>> refs/remotes/origin/master
