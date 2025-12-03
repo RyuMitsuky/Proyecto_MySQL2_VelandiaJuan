@@ -4,7 +4,7 @@ Segundo diseño del modelo de base de datos para el sistema de gestión de pedid
 
 ## Diagrama Mermaid
 
-
+```mermaid
 erDiagram
     PERSONA {
         INT id_persona PK
@@ -99,3 +99,4 @@ erDiagram
     INGREDIENTE ||--o{ PIZZA_INGREDIENTE : usa
     PEDIDO ||--o{ DOMICILIO : tiene
     REPARTIDOR ||--o{ DOMICILIO : asignado_a
+```
