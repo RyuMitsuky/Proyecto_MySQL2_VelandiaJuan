@@ -67,3 +67,27 @@ DELIMITER ;
 SELECT calcular_ganancia_diaria(CURDATE());
 SELECT calcular_ganancia_diaria('2025-12-02');
 
+
+-- Actualizar estado
+
+DROP PROCEDURE IF EXISTS actualizar_estado_entregado;
+
+DELIMITER $$
+
+
+
+CREATE PROCEDURE actualizar_estado_entregado()
+BEGIN
+    UPDATE PEDIDO
+    JOIN DOMICILIO ON PEDIDO.id_pedido = DOMICILIO.id_pedido
+    SET PEDIDO.estado = 'entregado'
+    WHERE DOMICILIO.hora_entrega IS NOT NULL
+    AND PEDIDO.estado <> 'entregado';
+END$$
+
+CALL actualizar_estado_entregado();
+
+
+DELIMITER ;
+
+
