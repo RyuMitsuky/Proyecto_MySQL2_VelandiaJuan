@@ -1,4 +1,4 @@
-
+-- calcular total pedido con el iva
 
 
 DROP FUNCTION IF EXISTS calcular_total_pedido;
@@ -33,7 +33,7 @@ DELIMITER ;
 
 SELECT calcular_total_pedido(1);
 
-
+-- Calcular la ganancia diaria
 
 DROP FUNCTION IF EXISTS calcular_ganancia_diaria;
 
