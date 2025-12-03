@@ -1,4 +1,12 @@
--- calcular total pedido con el iva
+-- Funciones y Procedimientos:
+
+-- 1-) Función para calcular el total de un pedido (sumando precios de pizzas + costo de envío + IVA).
+-- 2-) Función para calcular la ganancia neta diaria (ventas - costos de ingredientes).
+-- 3-) Procedimiento para cambiar automáticamente el estado del pedido a “entregado” cuando se registre la hora de entrega.
+
+
+
+-- 1-) calcular total pedido con el iva
 
 
 DROP FUNCTION IF EXISTS calcular_total_pedido;
@@ -30,8 +38,10 @@ END$$
 
 DELIMITER ;
 
+-- 2-) Consulta para ver el total del pedido ya con la suma del costo domicilio y el iva
 
-SELECT calcular_total_pedido(1);
+
+SELECT calcular_total_pedido(1); -- Ejemplo se consulta el pedido 1
 
 -- Calcular la ganancia diaria
 
@@ -64,11 +74,13 @@ END$$
 
 DELIMITER ;
 
-SELECT calcular_ganancia_diaria(CURDATE());
-SELECT calcular_ganancia_diaria('2025-12-02');
+
+-- consultas basicas para la ganancia diaria 
+SELECT calcular_ganancia_diaria(CURDATE()); -- Puede ser por la fecha actual
+SELECT calcular_ganancia_diaria('2025-12-02'); -- O puede ser por la fecha que se desee 
 
 
--- Actualizar estado
+-- 3-) Actualizar estado
 
 DROP PROCEDURE IF EXISTS actualizar_estado_entregado;
 
@@ -85,6 +97,8 @@ BEGIN
     AND PEDIDO.estado <> 'entregado';
 END$$
 
+
+-- Consulta para el estado, para que se vea efectivo el cambio de estado, se debe consultar con un pedido qu no tenga el estado entregado
 CALL actualizar_estado_entregado();
 
 

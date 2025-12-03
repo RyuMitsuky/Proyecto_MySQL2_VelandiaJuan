@@ -94,7 +94,7 @@ CREATE TABLE DOMICILIO (
 );
 
 
--- Base de datos, la data cruda
+-- Base de datos, la data cruda necesaria para que funciones los disparadores, funciones, consultas y las vistas
 
 INSERT INTO PERSONA (id_persona, nombre, telefono, direccion, correo, tipo) VALUES
 (1, 'Carlos López', '3001111111', 'Calle 10 #5-20', 'carlos@example.com', 'cliente'),
