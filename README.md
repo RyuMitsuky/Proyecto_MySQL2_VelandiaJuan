@@ -5,7 +5,6 @@ Segundo diseño del modelo de base de datos para el sistema de gestión de pedid
 ## Diagrama Mermaid
 
 
-
 erDiagram
     PERSONA {
         INT id_persona PK
@@ -88,15 +87,15 @@ erDiagram
         DECIMAL costo_envio
     }
 
-    CLIENTE ||--|| PERSONA : "hereda"
-    REPARTIDOR ||--|| PERSONA : "hereda"
-    VENDEDOR ||--|| PERSONA : "hereda"
-    REPARTIDOR }|--|| ZONA : "asignado a"
-    CLIENTE ||--o{ PEDIDO : "realiza"
-    VENDEDOR ||--o{ PEDIDO : "toma"
-    PEDIDO ||--o{ PEDIDO_PIZZA : "contiene"
-    PIZZA ||--o{ PEDIDO_PIZZA : "se incluye en"
-    PIZZA ||--o{ PIZZA_INGREDIENTE : "tiene"
-    INGREDIENTE ||--o{ PIZZA_INGREDIENTE : "usa"
-    PEDIDO ||--o{ DOMICILIO : "tiene"
-    REPARTIDOR ||--o{ DOMICILIO : "asignado a"
+    CLIENTE ||--|| PERSONA : hereda
+    REPARTIDOR ||--|| PERSONA : hereda
+    VENDEDOR ||--|| PERSONA : hereda
+    REPARTIDOR }|--|| ZONA : asignado_a
+    CLIENTE ||--o{ PEDIDO : realiza
+    VENDEDOR ||--o{ PEDIDO : toma
+    PEDIDO ||--o{ PEDIDO_PIZZA : contiene
+    PIZZA ||--o{ PEDIDO_PIZZA : se_incluye_en
+    PIZZA ||--o{ PIZZA_INGREDIENTE : tiene
+    INGREDIENTE ||--o{ PIZZA_INGREDIENTE : usa
+    PEDIDO ||--o{ DOMICILIO : tiene
+    REPARTIDOR ||--o{ DOMICILIO : asignado_a
