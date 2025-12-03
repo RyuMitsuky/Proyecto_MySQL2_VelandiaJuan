@@ -99,5 +99,5 @@ erDiagram
     INGREDIENTE ||--o{ PIZZA_INGREDIENTE : usa
     PEDIDO ||--o{ DOMICILIO : tiene
     REPARTIDOR ||--o{ DOMICILIO : asignado_a
-<<<<<<< HEAD
+
 ```
