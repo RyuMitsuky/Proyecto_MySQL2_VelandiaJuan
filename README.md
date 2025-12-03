@@ -4,7 +4,8 @@ Segundo diseño del modelo de base de datos para el sistema de gestión de pedid
 
 ## Diagrama Mermaid
 
-```mermaid
+
+
 erDiagram
     PERSONA {
         INT id_persona PK
@@ -41,7 +42,6 @@ erDiagram
     PIZZA {
         INT id_pizza PK
         VARCHAR nombre
-        VARCHAR tamanio
         DECIMAL precio_base
         ENUM tipo
     }
