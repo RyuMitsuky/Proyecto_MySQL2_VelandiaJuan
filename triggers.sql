@@ -16,3 +16,28 @@ DELIMITER ;
 -- Pedido de prueba para comprobar que funciona el disparador
 INSERT INTO PEDIDO_PIZZA (id_pedido, id_pizza, cantidad)
 VALUES (2, 3, 2);
+
+
+-- Trigger de auditoría que registre en una tabla historial_precios cada vez que se modifique el precio de una pizza.
+
+CREATE TABLE historial_precios (
+    id_historial INT AUTO_INCREMENT PRIMARY KEY,
+    id_pizza INT,
+    precio_anterior DECIMAL(10,2),
+    precio_nuevo DECIMAL(10,2),
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+DELIMITER $$
+
+CREATE TRIGGER trg_pizza_cambio_precio
+AFTER UPDATE ON pizza
+FOR EACH ROW
+BEGIN
+    IF OLD.precio <> NEW.precio THEN
+        INSERT INTO historial_precios (id_pizza, precio_anterior, precio_nuevo)
+        VALUES (OLD.id_pizza, OLD.precio, NEW.precio);
+    END IF;
+END$$
+
+DELIMITER ;
